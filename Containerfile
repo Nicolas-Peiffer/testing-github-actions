@@ -34,20 +34,18 @@ ARG APP_GROUP_GID
 
 # create a non-root user since this app does not need root privileges
 RUN addgroup \
-    --gid ${APP_GROUP_GID} \
-    ${APP_GROUP}
+        -g ${APP_GROUP_GID} \
+        ${APP_GROUP}
     
 RUN adduser \
-    --uid ${APP_USER_UID} \
-    --gid ${APP_GROUP_GID} \
-    --shell "/bin/bash" \
-    --disabled-login \
-    --disabled-password \
-    --gecos "non root user" \
-    ${APP_USER}
+        -u ${APP_USER_UID} \
+        -G ${APP_GROUP} \
+        -s "/bin/sh" \
+        -D \
+        -g "non root user" \
+        ${APP_USER}
 
-RUN mkdir /home/${APP_USER} && \
-    touch /home/${APP_USER}/first-stage-container-build.txt && \
+RUN touch /home/${APP_USER}/first-stage-container-build.txt && \
     echo "this is the first build stage" > /home/${APP_USER}/second-stage-container-build.txt
 
 #==============================================================================#
@@ -55,8 +53,7 @@ RUN mkdir /home/${APP_USER} && \
 #==============================================================================#
 FROM builder-base as final
 
-RUN mkdir /home/${APP_USER} && \
-    touch /home/${APP_USER}/final-stage-container-build.txt && \
+RUN touch /home/${APP_USER}/final-stage-container-build.txt && \
     echo "this is the final build stage" > /home/${APP_USER}/final-stage-container-build.txt
 
 
