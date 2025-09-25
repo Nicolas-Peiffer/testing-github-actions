@@ -2,7 +2,7 @@
 # https://hub.docker.com/_/alpine/tags?name=3.22
 ARG ALPINE_VERSION=3.22.1
 ARG ALPINE_IMAGE_NAME=alpine
-ARG A_PARTICULAR_TAG_NAME="a-particular-tag"
+ARG A_PARTICULAR_TAG_NAME=a-particular-tag
 ARG A_PARTICULAR_TAG_SEMVER=5.4.3
 
 # Builder image's registry
