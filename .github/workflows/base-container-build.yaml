@@ -109,12 +109,12 @@ jobs:
           oci: true
           tags: ${{ steps.docker-metadata.outputs.tags }}
           #labels: ${{ steps.docker-metadata.outputs.labels }}
-          extra-args: |
-            --created-annotation=true
-            --inherit-annotations=true
-            --inherit-labels=true
-            --unsetannotation "org.opencontainers.image.url"
-            --unsetlabel "org.opencontainers.image.url"
+          ###extra-args: |                                      # only supported by buildah v1.41+
+          ###  --created-annotation=true                        # only supported by buildah v1.41+
+          ###  --inherit-annotations=true                       # only supported by buildah v1.41+
+          ###  --inherit-labels=true                            # only supported by buildah v1.41+
+          ###  --unsetannotation "org.opencontainers.image.url" # only supported by buildah v1.41+
+          ###  --unsetlabel "org.opencontainers.image.url"      # only supported by buildah v1.41+
 
       
       - name: Check images created by buildah

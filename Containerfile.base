@@ -65,6 +65,7 @@ ENTRYPOINT ["/bin/bash"]
 FROM final as final-annotations
 
 # See https://github.com/opencontainers/image-spec/blob/main/annotations.md
+# See https://specs.opencontainers.org/image-spec/annotations/
 ARG LABEL_CREATED=""
 ARG LABEL_AUTHOR="My Email <my.email@adomain.com>"
 ARG LABEL_URL="ghcr.io/nicolas-peiffer/testing-github-actions"
