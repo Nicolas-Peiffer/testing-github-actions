@@ -109,6 +109,13 @@ jobs:
           oci: true
           tags: ${{ steps.docker-metadata.outputs.tags }}
           #labels: ${{ steps.docker-metadata.outputs.labels }}
+          extra-args: |
+            --created-annotation=true
+            --inherit-annotations=true
+            --inherit-labels=true
+            --unsetannotation "org.opencontainers.image.url"
+            --unsetlabel "org.opencontainers.image.url"
+
       
       - name: Check images created by buildah
         run: buildah images
@@ -214,7 +221,7 @@ jobs:
 
   # Job to build a SLSA provenance attestation
   build-oci-true-provenance:
-    name: Generate SLSA provenance attestation for OCI (base image entrypoint /bin/bash)
+    name: Generate SLSA provenance attestation for OCI v1 container manifest
     needs: [build-oci-true, set-lowercase-repository]  # Ensure this job runs after build-oci-true
     permissions:
       actions: read # for detecting the Github Actions environment.
@@ -230,7 +237,7 @@ jobs:
       registry-password: ${{ secrets.GITHUB_TOKEN }}
 
   build-oci-false-provenance:
-    name: Generate SLSA provenance attestation for OCI (entrypoint goreleaser)
+    name: Generate SLSA provenance attestation for docker v2 container manifest
     needs: [build-oci-false, set-lowercase-repository]  # Ensure this job runs after build-oci-true
     permissions:
       actions: read # for detecting the Github Actions environment.
