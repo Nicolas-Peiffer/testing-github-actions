@@ -209,7 +209,7 @@ jobs:
 
 
   # Job to build a SLSA provenance attestation
-  base-image-provenance:
+  build-oci-true-provenance:
     name: Generate SLSA provenance attestation for OCI (base image entrypoint /bin/bash)
     needs: [build-oci-true, set-lowercase-repository]  # Ensure this job runs after build-oci-true
     permissions:
@@ -225,9 +225,9 @@ jobs:
       registry-username: ${{ github.actor }}
       registry-password: ${{ secrets.GITHUB_TOKEN }}
 
-  goreleaser-entryp-image-provenance:
+  build-oci-false-provenance:
     name: Generate SLSA provenance attestation for OCI (entrypoint goreleaser)
-    needs: [build-oci-false]  # Ensure this job runs after build-oci-true
+    needs: [build-oci-false, set-lowercase-repository]  # Ensure this job runs after build-oci-true
     permissions:
       actions: read # for detecting the Github Actions environment.
       id-token: write # for creating OIDC tokens for signing. Required for SLSA and Cosign
