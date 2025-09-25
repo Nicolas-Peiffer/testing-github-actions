@@ -47,6 +47,8 @@ jobs:
   build-oci-true:
     needs: set-lowercase-repository
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       - name: Checkout source code
         uses: actions/checkout@v5
@@ -129,6 +131,8 @@ jobs:
   build-oci-false:
     needs: set-lowercase-repository
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       - name: Checkout source code
         uses: actions/checkout@v5
